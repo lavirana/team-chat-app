@@ -1,59 +1,177 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 💬 Team Chat App
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A real-time team chat application inspired by Slack — built with **Laravel 12**, **Vue.js 3**, **PostgreSQL**, and **Laravel Reverb**.
 
-## About Laravel
+![Laravel](https://img.shields.io/badge/Laravel-12-red?style=flat-square&logo=laravel)
+![Vue.js](https://img.shields.io/badge/Vue.js-3-green?style=flat-square&logo=vue.js)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue?style=flat-square&logo=postgresql)
+![Laravel Reverb](https://img.shields.io/badge/Laravel_Reverb-WebSocket-purple?style=flat-square)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ✨ Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- 🔐 User registration and login (Laravel Sanctum)
+- 🏢 Create and manage workspaces
+- 📢 Public and private channels
+- 💬 Real-time messaging (Laravel Reverb WebSocket)
+- 📩 Direct messages between users
+- 📎 File and image sharing
+- 😀 Message reactions (emoji)
+- 🔔 Live notification bell with unread count
+- 🟢 Online / offline user status
+- ✅ Message read receipts
+- 🔍 Search messages
+- 👥 Role-based access (Admin / Member)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 🛠️ Tech Stack
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Backend
+| Technology | Purpose |
+|-----------|---------|
+| Laravel 12 | API and business logic |
+| Laravel Reverb | Real-time WebSocket server (self-hosted) |
+| Laravel Sanctum | Token-based API authentication |
+| Laravel Queue | Background jobs and notifications |
+| Spatie Permission | Roles and permissions |
+| PostgreSQL 15 | Main database |
 
-## Laravel Sponsors
+### Frontend
+| Technology | Purpose |
+|-----------|---------|
+| Vue.js 3 (Composition API) | UI framework |
+| Vue Router 4 | Client-side routing |
+| Pinia | State management |
+| Laravel Echo + Pusher JS | WebSocket client |
+| Axios | API calls |
+| Chart.js | Dashboard charts |
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## 📸 Screenshots
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+> Coming soon
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## ⚙️ Requirements
 
-## Code of Conduct
+- PHP 8.2+
+- Composer
+- Node.js 18+
+- PostgreSQL 15+
+- Laravel 12
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 🚀 Installation
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 1. Clone the repository
 
-## License
+```bash
+git clone https://github.com/your-username/team-chat-app.git
+cd team-chat-app
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 2. Install PHP dependencies
+
+```bash
+composer install
+```
+
+### 3. Set up environment
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+### 4. Configure database in `.env`
+
+```bash
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=chat_app
+DB_USERNAME=postgres
+DB_PASSWORD=your_password
+```
+
+### 5. Run migrations
+
+```bash
+php artisan migrate
+```
+
+### 6. Install frontend dependencies
+
+```bash
+cd chat-frontend
+npm install
+```
+
+### 7. Configure frontend `.env`
+
+```bash
+cp .env.example .env
+# Update VITE_REVERB_* values to match your backend .env
+```
+
+---
+
+## ▶️ Running the Project
+
+You need 4 terminals running at the same time:
+
+```bash
+# Terminal 1 — Laravel API
+php artisan serve
+
+# Terminal 2 — Laravel Reverb (WebSocket server)
+php artisan reverb:start --debug
+
+# Terminal 3 — Queue worker
+php artisan queue:work
+
+# Terminal 4 — Vue frontend
+cd chat-frontend
+npm run dev
+```
+
+Then open: **http://localhost:5173**
+
+---
+
+## 📁 Project Structure
+
+```
+chat-app/                   ← Laravel backend
+├── app/
+│   ├── Http/Controllers/
+│   ├── Models/
+│   ├── Events/
+│   └── Jobs/
+├── routes/
+│   ├── api.php
+│   └── channels.php
+└── ...
+
+chat-frontend/              ← Vue.js frontend
+├── src/
+│   ├── views/
+│   ├── components/
+│   ├── stores/
+│   ├── composables/
+│   └── router/
+└── ...
+```
+
+---
+
+## 🗺️ Roadmap
+
+See [ROADMAP.md](./ROADMAP.md) for the full development plan.
+
+---
