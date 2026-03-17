@@ -3,6 +3,12 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\WorkspaceController;
+use App\Http\Controllers\ChannelController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\DirectMessageController;
+use App\Http\Controllers\NotificationController;
 
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -14,7 +20,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/me', [AuthController::class, 'me']);
 
     Route::post('/users/search', [UserController::class, 'search']);
-    Route::patch('/users/ststus', [UserController::class, 'updateStatus']);
+    Route::patch('/users/status', [UserController::class, 'updateStatus']);
     Route::post('/users/avatar', [UserController::class, 'uploadAvatar']);
 
     //workspace
@@ -29,8 +35,8 @@ Route::middleware('auth:sanctum')->group(function(){
     });
 
      //direct messages
-     Route::get('/dms', [DMController::class, 'index']);
-     Route::post('/dms', [DMController::class, 'store']);
+     Route::get('/dm/{user}',  [DirectMessageController::class, 'index']);
+     Route::post('/dm/{user}', [DirectMessageController::class, 'store']);
 
      // Messages
     Route::get('/channels/{channel}/messages',       [MessageController::class, 'index']);
