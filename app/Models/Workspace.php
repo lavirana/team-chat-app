@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use App\Models\channels;
 
-class Workspaces extends Model
+class Workspace extends Model
 {
     protected $fillable = [
         'name',

@@ -28,6 +28,7 @@ return new class extends Migration
             $table->enum('role', ['admin', 'member'])->default('member');
             $table->timestamp('joined_at')->nullable();
             $table->unique(['workspace_id', 'user_id']);
+            $table->timestamps();
         });
     }
 
