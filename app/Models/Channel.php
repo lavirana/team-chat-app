@@ -48,4 +48,5 @@ class Channel extends Model
                     ->where('created_at', '>', $member->pivot->last_read_at)
                     ->count();
     }
+    
 }
