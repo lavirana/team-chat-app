@@ -1,21 +1,32 @@
-import { ofetch } from 'ofetch';
+import { ofetch } from 'ofetch'
 
 const api = ofetch.create({
     baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api',
-     
-     onRequest( { options }) {
-        options.headers  = {
+
+    onRequest({ options }) {
+        const token = localStorage.getItem('token')
+
+        // Debug — console me dekho
+        console.log('Token being sent:', token)
+
+        options.headers = {
             ...options.headers,
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-            'Accept': 'application/json',
+            'Accept':       'application/json',
+            'Content-Type': 'application/json',
+            ...(token && { 'Authorization': `Bearer ${token}` }),
         }
-     },
-     onResponseError({ response }) {
-        //Handle 401 globally — redirect to login
-        if(response.status === 401) {
-            localStorage.removeItem('token');
-            window.location.href = '/login';
+
+        // Debug — headers dekho
+        console.log('Headers:', options.headers)
+    },
+
+    onResponseError({ response }) {
+        console.log('Response error:', response.status)
+        if (response.status === 401) {
+            localStorage.removeItem('token')
+            window.location.href = '/login'
         }
-     }
-});
+    }
+})
+
 export default api

@@ -66,6 +66,10 @@ export const useMessagesStore = defineStore('messages', () => {
             body:   { emoji },
         })
     }
+    function clearMessages() {
+        messages.value       = []
+        currentChannel.value = null
+    }
 
     return {
         messages, isLoading, currentChannel,
