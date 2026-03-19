@@ -113,7 +113,14 @@ async function handleCreate() {
     if (workspace) {
         showCreate.value = false
         form.value       = { name: '', description: '' }
-        router.push(`/workspace/${workspace.id}/channel/general`)
+
+        // ✅ General channel ka ID nikalo — name nahi
+        const generalChannel = workspace.channels?.find(c => c.name === 'general')
+        if (generalChannel) {
+            router.push(`/workspace/${workspace.id}/channel/${generalChannel.id}`)
+        } else {
+            router.push(`/workspaces`)
+        }
     } else {
         errorMsg.value = 'Failed to create workspace.'
     }

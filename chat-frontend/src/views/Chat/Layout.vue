@@ -34,7 +34,7 @@
           :key="channel.id"
           class="channel-item"
           :class="{ active: currentChannelId == channel.id }"
-          @click="goToChannel(channel.id)"
+          @click="goToChannel(channel)"
         >
           # {{ channel.name }}
         </div>
@@ -112,8 +112,14 @@ const currentChannelId = computed(() => route.params.channelId)
 const workspaceId      = computed(() => route.params.workspaceId)
 
 onMounted(async () => {
+    if (!auth.user) await auth.fetchMe()
     await fetchWorkspace()
     await fetchChannels()
+
+    if (!route.params.channelId && channelStore.channels.length > 0) {
+        const first = channelStore.channels[0]
+        router.push(`/workspace/${workspaceId.value}/channel/${first.id}`)
+    }
 })
 
 // Reload when workspace changes
@@ -150,7 +156,7 @@ async function handleCreateChannel() {
         channels.value.push(channel)
         showCreateChannel.value = false
         channelForm.value       = { name: '', description: '' }
-        goToChannel(channel.id)
+        goToChannel(channel)
     } catch {
         console.error('Failed to create channel')
     } finally {
@@ -158,8 +164,8 @@ async function handleCreateChannel() {
     }
 }
 
-function goToChannel(channelId) {
-    router.push(`/workspace/${workspaceId.value}/channel/${channelId}`)
+function goToChannel(channel) {
+    router.push(`/workspace/${workspaceId.value}/channel/${channel.id}`)
 }
 
 function goToWorkspaces() {

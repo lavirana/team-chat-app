@@ -76,4 +76,10 @@ class WorkspaceController extends Controller
     return response()->json(['message' => 'Member added successfully'], 200);
   }
 
+  public function show(Workspace $workspace)
+{
+    return response()->json(
+        $workspace->load(['channels', 'members'])
+    );
+}
 }

@@ -19,9 +19,9 @@
 
       <!-- No messages -->
       <div v-else-if="messagesStore.messages.length === 0" class="status-msg">
-        <p>🎉 Yeh {{ channelName }} channel ka start hai!</p>
+        <p>🎉 Channel {{ channelName }} Start!</p>
         <p style="font-size:13px; color: #666; margin-top: 8px;">
-          Pehla message bhejo!
+         Send the Message first
         </p>
       </div>
 
@@ -144,7 +144,11 @@ const fileInput      = ref(null)
 const sending        = ref(false)
 
 const channelId   = computed(() => route.params.channelId)
-const channelName = computed(() => route.params.channelId)
+
+const channelName = computed(() => {
+    return route.params.channelId
+})
+
 
 onMounted(async () => {
     await loadMessages()
@@ -158,6 +162,22 @@ onUnmounted(() => {
     leaveChannel(channelId.value)
     messagesStore.clearMessages()
 })
+
+async function fetchChannelData() {
+    try {
+        const workspaceId = route.params.workspaceId
+        console.log('workspaceId:', workspaceId)        // ← check
+        console.log('channelId:', channelId.value)      // ← check
+
+        const channels = await api(`/workspaces/${workspaceId}/channels`)
+        console.log('All channels:', channels)           // ← check — array aa raha hai?
+
+        channelData.value = channels.find(c => c.id == channelId.value)
+        console.log('Channel found:', channelData.value) // ← check — null ya object?
+    } catch (err) {
+        console.error('Channel fetch failed:', err)
+    }
+}
 
 // Channel change hone pe reload
 watch(channelId, async (newId, oldId) => {
